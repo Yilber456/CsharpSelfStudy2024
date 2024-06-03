@@ -1,2 +1,2 @@
 # CsharpSelfStudy2024
-BigStudyPoject
+Compilation of many examples
