@@ -1,162 +1,162 @@
-# Repaso de C#
+# C# Review
 
-Este documento cubre los conceptos fundamentales de C# para programadores novatos, con explicaciones claras, ejemplos de código y mejores prácticas.
+This document covers the fundamental concepts of C# for beginner programmers, with clear explanations, code examples, and best practices.
 
-## 1. Principios de la Programación Orientada a Objetos (OOP)
+## 1. Object-Oriented Programming (OOP) Principles
 
-### 1.1 Abstracción
+### 1.1 Abstraction
 
-La abstracción nos ayuda a simplificar la realidad, enfocándonos solo en los detalles esenciales de un objeto. Por ejemplo, una clase `Persona` podría incluir solo propiedades relevantes:
+Abstraction helps simplify reality by focusing only on essential details of an object. For example, a `Person` class might include only relevant properties:
 
 ```csharp
-class Persona {
-    public string Nombre { get; set; }
-    public int Edad { get; set; }
+class Person {
+    public string Name { get; set; }
+    public int Age { get; set; }
 }
 ```
 
-### 1.2 Encapsulación
+### 1.2 Encapsulation
 
-La encapsulación oculta la implementación interna de una clase, permitiendo acceso solo a lo necesario.
+Encapsulation hides the internal implementation of a class, allowing access only to what is necessary.
 
 ```csharp
-class CuentaBancaria {
-    private double saldo;
+class BankAccount {
+    private double balance;
     
-    public void Depositar(double cantidad) {
-        saldo += cantidad;
+    public void Deposit(double amount) {
+        balance += amount;
     }
     
-    public double ObtenerSaldo() {
-        return saldo;
+    public double GetBalance() {
+        return balance;
     }
 }
 ```
 
-### 1.3 Herencia
+### 1.3 Inheritance
 
-Permite que una clase derive de otra, heredando sus propiedades y métodos.
+Allows one class to derive from another, inheriting its properties and methods.
 
 ```csharp
 class Animal {
-    public void HacerSonido() {
-        Console.WriteLine("Haciendo sonido...");
+    public void MakeSound() {
+        Console.WriteLine("Making sound...");
     }
 }
 
-class Perro : Animal {
-    public void Ladrar() {
-        Console.WriteLine("Guau guau!");
+class Dog : Animal {
+    public void Bark() {
+        Console.WriteLine("Woof woof!");
     }
 }
 ```
 
-### 1.4 Polimorfismo
+### 1.4 Polymorphism
 
-Permite que un mismo método tenga diferentes implementaciones.
+Allows a method to have different implementations.
 
 ```csharp
 class Animal {
-    public virtual void HacerSonido() {
-        Console.WriteLine("Sonido genérico");
+    public virtual void MakeSound() {
+        Console.WriteLine("Generic sound");
     }
 }
 
-class Perro : Animal {
-    public override void HacerSonido() {
-        Console.WriteLine("Guau!");
+class Dog : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Woof!");
     }
 }
 ```
 
-## 2. Tipos de Datos en C#
+## 2. Data Types in C#
 
-### 2.1 Tipos por Valor vs Tipos por Referencia
+### 2.1 Value Types vs Reference Types
 
-- **Tipos por Valor**: Se almacenan en la pila (stack) y contienen directamente los datos. Ejemplo: `int`, `double`, `struct`.
-- **Tipos por Referencia**: Se almacenan en el heap y su variable contiene una referencia a la ubicación de memoria. Ejemplo: `class`, `string`, `array`.
+- **Value Types**: Stored in the stack and directly contain data. Example: `int`, `double`, `struct`.
+- **Reference Types**: Stored in the heap, and the variable holds a reference to the memory location. Example: `class`, `string`, `array`.
 
 ```csharp
-int valorA = 5;
-int valorB = valorA; // Copia el valor
+int valueA = 5;
+int valueB = valueA; // Copies the value
 
-string textoA = "Hola";
-string textoB = textoA; // Copia la referencia
+string textA = "Hello";
+string textB = textA; // Copies the reference
 ```
 
-## 3. Colecciones en C#
+## 3. Collections in C#
 
-### 3.1 Colecciones Genéricas
+### 3.1 Generic Collections
 
 ```csharp
-List<int> numeros = new List<int>() { 1, 2, 3 };
-Dictionary<string, int> edades = new Dictionary<string, int> { {"Juan", 30}, {"Ana", 25} };
+List<int> numbers = new List<int>() { 1, 2, 3 };
+Dictionary<string, int> ages = new Dictionary<string, int> { {"John", 30}, {"Anna", 25} };
 ```
 
-### 3.2 Colecciones No Genéricas (Obsoletas)
+### 3.2 Non-Generic Collections (Obsolete)
 
-Se recomienda usar colecciones genéricas en lugar de `ArrayList` y `Hashtable` por razones de seguridad y rendimiento.
+It is recommended to use generic collections instead of `ArrayList` and `Hashtable` for security and performance reasons.
 
-## 4. Modificadores de Acceso
+## 4. Access Modifiers
 
-- `public`: Accesible desde cualquier parte.
-- `private`: Solo accesible dentro de la clase.
-- `protected`: Accesible dentro de la clase y sus derivadas.
-- `internal`: Accesible dentro del mismo ensamblado.
+- `public`: Accessible from anywhere.
+- `private`: Accessible only within the class.
+- `protected`: Accessible within the class and derived classes.
+- `internal`: Accessible within the same assembly.
 
-## 5. Clases Abstractas vs Interfaces
+## 5. Abstract Classes vs Interfaces
 
-### 5.1 Clase Abstracta
+### 5.1 Abstract Class
 
 ```csharp
-abstract class Figura {
-    public abstract double CalcularArea();
+abstract class Shape {
+    public abstract double CalculateArea();
 }
 ```
 
-### 5.2 Interfaz
+### 5.2 Interface
 
 ```csharp
 interface IAnimal {
-    void HacerSonido();
+    void MakeSound();
 }
 ```
 
-**¿Cuándo usar qué?**
+**When to use what?**
 
-- Usa una **interfaz** cuando varias clases no relacionadas comparten un comportamiento.
-- Usa una **clase abstracta** cuando hay una relación jerárquica clara.
+- Use an **interface** when unrelated classes share a behavior.
+- Use an **abstract class** when there is a clear hierarchical relationship.
 
-## 6. Métodos de Extensión
+## 6. Extension Methods
 
-Permiten agregar funcionalidad a clases existentes sin modificarlas.
+Allow adding functionality to existing classes without modifying them.
 
 ```csharp
 public static class StringExtensions {
-    public static string PrimeraLetraMayuscula(this string texto) {
-        return char.ToUpper(texto[0]) + texto.Substring(1);
+    public static string CapitalizeFirstLetter(this string text) {
+        return char.ToUpper(text[0]) + text.Substring(1);
     }
 }
 ```
 
 ## 7. LINQ
 
-LINQ (Language Integrated Query) permite consultas sobre colecciones de manera fluida.
+LINQ (Language Integrated Query) enables fluent queries on collections.
 
 ```csharp
-List<int> numeros = new List<int>() { 1, 2, 3, 4, 5 };
-var pares = numeros.Where(n => n % 2 == 0).ToList();
+List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+var evenNumbers = numbers.Where(n => n % 2 == 0).ToList();
 ```
 
-## 8. Manejo de Excepciones
+## 8. Exception Handling
 
 ```csharp
 try {
-    int resultado = 10 / 0;
+    int result = 10 / 0;
 } catch (DivideByZeroException ex) {
-    Console.WriteLine("No se puede dividir por cero.");
+    Console.WriteLine("Cannot divide by zero.");
 } finally {
-    Console.WriteLine("Ejecución finalizada.");
+    Console.WriteLine("Execution completed.");
 }
 ```
 
@@ -164,12 +164,12 @@ try {
 
 ```csharp
 using (HttpClient client = new HttpClient()) {
-    HttpResponseMessage respuesta = await client.GetAsync("https://api.ejemplo.com/datos");
-    string contenido = await respuesta.Content.ReadAsStringAsync();
-    Console.WriteLine(contenido);
+    HttpResponseMessage response = await client.GetAsync("https://api.example.com/data");
+    string content = await response.Content.ReadAsStringAsync();
+    Console.WriteLine(content);
 }
 ```
 
-## Conclusión
+## Conclusion
 
-Este repaso cubre los conceptos esenciales de C#. Es recomendable seguir practicando y explorando documentación oficial para profundizar más.
+This review covers the essential concepts of C#. It is recommended to continue practicing and exploring official documentation for deeper understanding.
